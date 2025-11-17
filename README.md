@@ -1,84 +1,129 @@
-===========================================================
-                Facial Gesture Video Trigger
-===========================================================
+# 🎭 FreakDetector - Enhanced AI Gesture Recognition System
 
-This program uses your webcam and MediaPipe’s Face Mesh model
-to detect a specific facial gesture — sticking out your tongue 
-while shaking your head — and plays a video automatically 
-when the gesture is sustained for a short duration.
+> **Originally forked from [Elijah-cyber7/FreakDetector](https://github.com/Elijah-cyber7/FreakDetector)**  
+> Enhanced with multiple gesture detection and web interface capabilities
 
------------------------------------------------------------
-REQUIREMENTS
------------------------------------------------------------
-1. Python 3.8+
-2. OpenCV
-3. MediaPipe
+FreakDetector is an intelligent real-time gesture recognition system that uses computer vision to detect facial expressions and hand gestures, responding with entertaining media content. Built with MediaPipe and OpenCV, it now supports multiple detection modes including a modern web interface.
 
-Install dependencies with:
-    pip install opencv-python mediapipe
+## What's New in This Fork
 
------------------------------------------------------------
-HOW IT WORKS
------------------------------------------------------------
-1. The webcam feed runs continuously.
-2. MediaPipe detects facial landmarks (nose, lips, tongue).
-3. The script tracks:
-   - Nose position changes (head shake motion)
-   - Mouth openness and tongue position
-4. When both the tongue-out and head-shake gestures are
-   sustained for a set number of frames (default = 7),
-   a local video (orca-tongue.mp4) plays in a new window.
+This enhanced version includes several major improvements over the original:
 
-After the video finishes, it closes automatically.
+- **Eyebrow Raise Detection** - Detects when you raise your eyebrows significantly
+- **Thumbs Up Detection** - Recognizes clear thumbs up hand gestures  
+- **Streamlit Web App** - Modern browser-based interface with real-time camera feed
+- **Multi-Gesture System** - All gestures work simultaneously with individual media responses
+- **Better User Experience** - Enhanced UI, status indicators, and error handling
+- **Improved Detection** - More reliable gesture recognition algorithms
 
------------------------------------------------------------
-CONFIGURATION
------------------------------------------------------------
-You can edit the parameters at the top of the file:
+## Gesture Detection Modes
 
-    VIDEO_PATH       — path to the video file to play  
-    SHAKE_WINDOW     — number of frames to track head motion  
-    SHAKE_THRESHOLD  — sensitivity for head movement  
-    TONGUE_THRESHOLD — how far the tongue must extend  
-    MIN_MOUTH_OPEN   — minimum mouth opening to consider  
-    TRIGGER_COOLDOWN — frames to wait before retriggering  
-    SUSTAIN_FRAMES   — gesture must last this many frames  
+| Gesture | Trigger | Media Response |
+|---------|---------|----------------|
+| **Tongue + Head Shake** | Stick out tongue while shaking head | `orca.mp4` |
+| **Eyebrow Raise** | Raise eyebrows significantly | `eyebrow_raise.mp4` |
+| **Thumbs Up** | Clear thumbs up hand gesture | `thumbsup.gif` |
 
------------------------------------------------------------
-LOGIC OVERVIEW
------------------------------------------------------------
-- Facial landmarks are read from MediaPipe in each frame.
-- The horizontal position of the nose tip is stored to detect
-  shaking motion.
-- Lip and tongue positions determine whether the mouth is open
-  and the tongue is extended.
-- When both are true for several frames in a row, the video
-  playback thread activates.
-- The playback happens in a separate thread so the webcam feed
-  remains responsive.
+## Quick Start
 
------------------------------------------------------------
-OUTPUT WINDOWS
------------------------------------------------------------
-1. "Facial Gesture Detection" — Live webcam feed.
-2. "Video Playback" — Plays the triggered video.
+### Option 1: Desktop Application
+```bash
+# Clone the repository
+git clone https://github.com/Ayaindeed/FreakDetector-.git
+cd FreakDetector-
 
-Both windows can be closed by pressing the ESC key.
+# Install dependencies
+pip install -r requirements.txt
 
------------------------------------------------------------
-AUTHOR
------------------------------------------------------------
-Created by Andrew Allen  
-Instagram: ElijahCyber 
-LinkedIn: https://www.linkedin.com/in/andrew-allen-655499190/
-Last updated: October 2025  
+# Run the desktop version
+python main.py
+```
 
------------------------------------------------------------
-NOTES
------------------------------------------------------------
-- Make sure your webcam is connected and accessible.  
-- Ensure your lighting is adequate for MediaPipe to detect
-  facial landmarks accurately.  
-- Replace the default video file with any .mp4 you prefer.
+### Option 2: Web Application (Recommended)
+```bash
+# Install dependencies
+pip install -r requirements.txt
 
-===========================================================
+# Launch web interface
+streamlit run streamlit_app.py
+```
+
+The web app will open in your browser with an intuitive interface featuring live camera feed, real-time detection status, and media responses.
+
+## Dependencies
+
+```
+opencv-python>=4.5.0
+mediapipe>=0.9.0
+streamlit>=1.25.0
+numpy>=1.21.0
+Pillow>=8.3.0
+```
+
+## Project Structure
+
+```
+FreakDetector/
+├── main.py                 # Desktop application
+├── streamlit_app.py         # Web application  
+├── requirements.txt         # Dependencies
+├── USAGE.md                # Detailed usage guide
+├── Assets/                 # Media files
+│   ├── orca.mp4           # Tongue + shake response
+│   ├── eyebrow_raise.mp4  # Eyebrow raise response
+│   └── thumbsup.gif       # Thumbs up response
+└── README.md              # This file
+```
+
+## Usage Tips
+
+- **Lighting**: Ensure good lighting for accurate detection
+- **Camera Position**: Face the camera directly for best results
+- **Gesture Duration**: Hold gestures for 2-3 seconds to trigger
+- **Cooldown**: Wait between gestures to avoid rapid triggering
+
+## Customization
+
+### Adding New Gestures
+1. Add your media file to the `Assets/` folder
+2. Update the `VIDEO_PATHS` dictionary in the code
+3. Implement your detection function following the existing patterns
+4. Add the gesture to the main detection loop
+
+### Adjusting Sensitivity
+Modify these parameters in the settings section:
+- `SHAKE_THRESHOLD`: Head shake sensitivity
+- `TONGUE_THRESHOLD`: Tongue detection sensitivity  
+- `EYEBROW_THRESHOLD`: Eyebrow raise sensitivity
+- `SUSTAIN_FRAMES`: Frames needed to trigger response
+
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-gesture`)
+3. Commit your changes (`git commit -m 'Add amazing gesture detection'`)
+4. Push to the branch (`git push origin feature/amazing-gesture`)
+5. Open a Pull Request
+
+## License
+
+This project maintains the same license as the original repository. See the original project for licensing details.
+
+## Credits
+
+- **Original Creator**: [Andrew Allen (ElijahCyber)](https://github.com/Elijah-cyber7)
+- **Enhanced by**: [Ayaindeed](https://github.com/Ayaindeed)
+- **Technologies**: MediaPipe (Google), OpenCV, Streamlit
+
+## Troubleshooting
+
+**Camera Issues**: Check camera permissions and ensure no other apps are using the camera  
+**Performance**: Reduce camera resolution or adjust detection thresholds  
+**Media Playback**: Verify media files exist in the Assets folder  
+
+For detailed troubleshooting, see [USAGE.md](USAGE.md).
+
+---
+
+**Ready to detect some gestures?**  Launch the app and start making faces!
