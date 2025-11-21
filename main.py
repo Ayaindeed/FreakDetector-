@@ -144,9 +144,9 @@ def detect_thumbs_up(hand_landmarks):
     return False
 
 # === Main loop ===
-print("🎥 Starting camera... Press ESC to quit")
-print("👅 Stick out your tongue and shake your head to trigger video!")
-print("📺 Camera window should appear now...")
+print("Starting camera... Press ESC to quit")
+print("Stick out your tongue and shake your head to trigger video!")
+print("Camera window should appear now...")
 
 # Create window
 cv2.namedWindow("Facial Gesture Detection", cv2.WINDOW_AUTOSIZE)
@@ -185,11 +185,11 @@ while cap.isOpened():
         if tongue_out and head_shake:
             gesture_detected = True
             detected_gesture = "tongue_shake"
-            print(f"👅🤯 Tongue + Shake detected! Frame {gesture_frames + 1}/{SUSTAIN_FRAMES}")
+            print(f"Tongue + Shake detected! Frame {gesture_frames + 1}/{SUSTAIN_FRAMES}")
         elif eyebrow_raised:
             gesture_detected = True
             detected_gesture = "eyebrow_raise"
-            print(f"🤨 Eyebrow raise detected! Frame {gesture_frames + 1}/{SUSTAIN_FRAMES}")
+            print(f"Eyebrow raise detected! Frame {gesture_frames + 1}/{SUSTAIN_FRAMES}")
     
     # Check hand gestures
     if hands_result.multi_hand_landmarks:
@@ -197,7 +197,7 @@ while cap.isOpened():
         if thumbs_up:
             gesture_detected = True
             detected_gesture = "thumbs_up"
-            print(f"👍 Thumbs up detected! Frame {gesture_frames + 1}/{SUSTAIN_FRAMES}")
+            print(f"Thumbs up detected! Frame {gesture_frames + 1}/{SUSTAIN_FRAMES}")
 
     # Count consecutive frames
     if gesture_detected:
