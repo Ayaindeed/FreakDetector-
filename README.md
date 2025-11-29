@@ -1,4 +1,4 @@
-# 🎭 FreakDetector - Enhanced AI Gesture Recognition System
+# FreakDetector - Enhanced AI Gesture Recognition System
 
 > **Originally forked from [Elijah-cyber7/FreakDetector](https://github.com/Elijah-cyber7/FreakDetector)**  
 > Enhanced with multiple gesture detection and web interface capabilities
